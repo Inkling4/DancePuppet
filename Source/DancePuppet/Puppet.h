@@ -18,6 +18,9 @@ public:
 	APuppet();
 
 protected:
+	
+	FTimerHandle PuppetTimerHandle;
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay();
 	
@@ -25,6 +28,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
 	TObjectPtr<UBoxComponent> BasicAttackHitbox;
 	
+	// The delay between when attack starts and when the hit detection happens.
+	// For animation synchronization purposes.
+	UPROPERTY(EditDefaultsOnly, VisibleAnywhere, BlueprintReadOnly, Category = "Combat")
+	float Attack1HitDelay = 1.f;
 	
 	// Properties
 	UPROPERTY(EditAnywhere, category = "Status")
@@ -38,6 +45,9 @@ protected:
 	
 	UFUNCTION(BlueprintImplementableEvent, category = "Puppet Animations")
 	void PlayAttack1Animation();
+	
+	// Checks hitbox and deals damage
+	void Attack1HitDetection();
 	
 	
 public:	

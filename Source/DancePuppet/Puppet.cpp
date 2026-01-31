@@ -63,8 +63,35 @@ void APuppet::BasicAttack()
 	
 	PlayAttack1Animation();
 	
-	// TODO: Delay variable here, then do collision check and deal damage
+	GetWorld()->GetTimerManager().SetTimer(PuppetTimerHandle, this, &APuppet::Attack1HitDetection, Attack1HitDelay, false);
 	
+}
+
+void APuppet::Attack1HitDetection()
+{
+	
+	if (BasicAttackHitbox)
+	{
+		TArray<AActor*> OverlappingActors;
+		BasicAttackHitbox->GetOverlappingActors(OverlappingActors);
+		for (AActor* OverlappingActor : OverlappingActors)
+		{
+			TObjectPtr<APuppet> PuppetPtr;
+			if (PuppetPtr = Cast<APuppet> OverlappingActor)
+			{
+				// Deals damage
+				PuppetPtr->PuppetTakeDamage(Damage);
+				GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, TEXT("Attack hit!"));
+				return;
+			}
+		}
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, TEXT("Attack hitbox is not valid!"));
+	}
+	
+	GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, TEXT("Attack missed!"));
 	
 }
 
