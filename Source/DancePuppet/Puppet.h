@@ -6,7 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Puppet.generated.h"
 
-
+class UBoxComponent;
 
 UCLASS()
 class DANCEPUPPET_API APuppet : public ACharacter
@@ -20,6 +20,10 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay();
+	
+	// Hit detection for basic attack
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
+	TObjectPtr<UBoxComponent> BasicAttackHitbox;
 	
 	
 	// Properties
