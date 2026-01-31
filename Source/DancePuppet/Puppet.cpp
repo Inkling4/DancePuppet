@@ -3,6 +3,7 @@
 
 #include "Puppet.h"
 #include "Components/BoxComponent.h"
+#include "GameFramework/PawnMovementComponent.h"
 
 // Sets default values
 APuppet::APuppet()
@@ -69,6 +70,7 @@ void APuppet::BasicAttack()
 
 void APuppet::Attack1HitDetection()
 {
+	bool bDidItHit = false;
 	
 	if (BasicAttackHitbox)
 	{
@@ -82,8 +84,9 @@ void APuppet::Attack1HitDetection()
 			{
 				// Deals damage
 				PuppetPtr->PuppetTakeDamage(Damage);
-				GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, TEXT("Attack hit!"));
-				return;
+				// Deals knockback
+				PuppetPtr->PuppetTakeKnockback(GetActorLocation());
+				bDidItHit = true;
 			}
 		}
 	}
@@ -92,9 +95,26 @@ void APuppet::Attack1HitDetection()
 		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, TEXT("Attack hitbox is not valid!"));
 	}
 	
-	GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, TEXT("Attack missed!"));
-	
+	if (bDidItHit)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, TEXT("Attack hit!"));
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, TEXT("Attack missed!"));
+	}
 }
 
-
-
+void APuppet::PuppetTakeKnockback(FVector KnockbackSourceLocation)
+{
+	float NewVelocity = 4000.f * KnockbackMult;
+	
+	FVector VelocityDirection = GetActorLocation() - KnockbackSourceLocation;
+	VelocityDirection.Normalize();
+	
+	
+	VelocityDirection *= {NewVelocity, NewVelocity, NewVelocity};
+	
+	GetMovementComponent()->Velocity = VelocityDirection;
+	
+}
