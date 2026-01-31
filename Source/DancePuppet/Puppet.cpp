@@ -77,11 +77,12 @@ void APuppet::Attack1HitDetection()
 		for (AActor* OverlappingActor : OverlappingActors)
 		{
 			TObjectPtr<APuppet> PuppetPtr;
-			if (PuppetPtr = Cast<APuppet> OverlappingActor)
+			PuppetPtr = Cast<APuppet>(OverlappingActor);
+			if (PuppetPtr)
 			{
 				// Deals damage
 				PuppetPtr->PuppetTakeDamage(Damage);
-				GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, TEXT("Attack hit!"));
+				GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, TEXT("Attack hit!"));
 				return;
 			}
 		}
@@ -91,7 +92,7 @@ void APuppet::Attack1HitDetection()
 		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, TEXT("Attack hitbox is not valid!"));
 	}
 	
-	GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, TEXT("Attack missed!"));
+	GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, TEXT("Attack missed!"));
 	
 }
 

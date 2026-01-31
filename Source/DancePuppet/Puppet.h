@@ -30,7 +30,7 @@ protected:
 	
 	// The delay between when attack starts and when the hit detection happens.
 	// For animation synchronization purposes.
-	UPROPERTY(EditDefaultsOnly, VisibleAnywhere, BlueprintReadOnly, Category = "Combat")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat")
 	float Attack1HitDelay = 1.f;
 	
 	// Properties
