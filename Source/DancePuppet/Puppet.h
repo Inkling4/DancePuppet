@@ -18,6 +18,9 @@ public:
 	APuppet();
 
 protected:
+	
+	FTimerHandle PuppetTimerHandle;
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay();
 	
@@ -25,19 +28,34 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
 	TObjectPtr<UBoxComponent> BasicAttackHitbox;
 	
+	// The delay between when attack starts and when the hit detection happens.
+	// For animation synchronization purposes.
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat")
+	float Attack1HitDelay = 0.33f;
 	
 	// Properties
 	UPROPERTY(EditAnywhere, category = "Status")
 	float Health = 3.f;
+	// The damage this puppet deals per basic attack.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, category = "Status")
 	float Damage = 1.f;
+	// Knockback multiplier on self
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, category = "Status")
+	float KnockbackMult = 1.f;
+	
 	
 	// Does a basic attack. Has no functionality in the base class, please override.
 	UFUNCTION(BlueprintCallable, Category = "Status")
 	virtual void BasicAttack();
 	
 	
-
+	UFUNCTION(BlueprintImplementableEvent, category = "Puppet Animations")
+	void PlayAttack1Animation();
+	
+	// Checks hitbox and deals damage
+	void Attack1HitDetection();
+	
+	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -51,6 +69,8 @@ public:
 	// Removes health by input damage
 	UFUNCTION(BlueprintCallable, Category = "Status")
 	void PuppetTakeDamage(float InDamage);
+	// Gets knocked back from source location.
+	void PuppetTakeKnockback(FVector KnockbackSourceLocation);
 	
 	
 

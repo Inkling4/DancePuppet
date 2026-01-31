@@ -3,6 +3,7 @@
 
 #include "Puppet.h"
 #include "Components/BoxComponent.h"
+#include "GameFramework/PawnMovementComponent.h"
 
 // Sets default values
 APuppet::APuppet()
@@ -59,8 +60,61 @@ void APuppet::PuppetTakeDamage(float InDamage)
 
 void APuppet::BasicAttack()
 {
-	// Override this in the children
+	// Override this in the children too
+	
+	PlayAttack1Animation();
+	
+	GetWorld()->GetTimerManager().SetTimer(PuppetTimerHandle, this, &APuppet::Attack1HitDetection, Attack1HitDelay, false);
+	
 }
 
+void APuppet::Attack1HitDetection()
+{
+	bool bDidItHit = false;
+	
+	if (BasicAttackHitbox)
+	{
+		TArray<AActor*> OverlappingActors;
+		BasicAttackHitbox->GetOverlappingActors(OverlappingActors);
+		for (AActor* OverlappingActor : OverlappingActors)
+		{
+			TObjectPtr<APuppet> PuppetPtr;
+			PuppetPtr = Cast<APuppet>(OverlappingActor);
+			if (PuppetPtr)
+			{
+				// Deals damage
+				PuppetPtr->PuppetTakeDamage(Damage);
+				// Deals knockback
+				PuppetPtr->PuppetTakeKnockback(GetActorLocation());
+				bDidItHit = true;
+			}
+		}
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, TEXT("Attack hitbox is not valid!"));
+	}
+	
+	if (bDidItHit)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, TEXT("Attack hit!"));
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, TEXT("Attack missed!"));
+	}
+}
 
-
+void APuppet::PuppetTakeKnockback(FVector KnockbackSourceLocation)
+{
+	float NewVelocity = 4000.f * KnockbackMult;
+	
+	FVector VelocityDirection = GetActorLocation() - KnockbackSourceLocation;
+	VelocityDirection.Normalize();
+	
+	
+	VelocityDirection *= {NewVelocity, NewVelocity, NewVelocity};
+	
+	GetMovementComponent()->Velocity = VelocityDirection;
+	
+}
