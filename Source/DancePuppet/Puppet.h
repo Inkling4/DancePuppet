@@ -55,6 +55,9 @@ protected:
 	// Checks hitbox and deals damage
 	void Attack1HitDetection();
 	
+	// Called when going to die
+	UFUNCTION(BLueprintCallable, Category = "Status")
+	virtual void Die();
 	
 public:	
 	// Called every frame

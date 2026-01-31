@@ -26,7 +26,8 @@ void APuppet::BeginPlay()
 void APuppet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
+	
 }
 
 float APuppet::PuppetGetHealth() const
@@ -44,6 +45,11 @@ void APuppet::PuppetSetHealth(float InHealth)
 	{
 		Health = InHealth;
 	}
+	
+	if (Health <= 0.f)
+	{
+		Die();
+	}
 }
 
 void APuppet::PuppetTakeDamage(float InDamage)
@@ -55,6 +61,10 @@ void APuppet::PuppetTakeDamage(float InDamage)
 	else
 	{
 		Health -= InDamage;
+	}
+	if (Health <= 0.f)
+	{
+		Die();
 	}
 }
 
@@ -117,4 +127,9 @@ void APuppet::PuppetTakeKnockback(FVector KnockbackSourceLocation)
 	
 	GetMovementComponent()->Velocity = VelocityDirection;
 	
+}
+
+void APuppet::Die()
+{
+	// Override in children
 }

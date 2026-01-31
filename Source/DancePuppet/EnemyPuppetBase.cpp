@@ -3,3 +3,8 @@
 
 #include "EnemyPuppetBase.h"
 
+
+void AEnemyPuppetBase::Die()
+{
+	Destroy();
+}
