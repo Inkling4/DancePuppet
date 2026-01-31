@@ -25,10 +25,34 @@ void APuppet::Tick(float DeltaTime)
 
 }
 
-// Called to bind functionality to input
-void APuppet::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+float APuppet::GetHealth() const
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+	return Health;
 }
+
+void APuppet::SetHealth(float InHealth)
+{
+	if (InHealth < 0.f)
+	{
+		Health = 0.f;
+	}
+	else
+	{
+		Health = InHealth;
+	}
+}
+
+void APuppet::TakeDamage(float InDamage)
+{
+	if (InDamage > Health)
+	{
+		Health = 0.f;
+	}
+	else
+	{
+		Health -= InDamage;
+	}
+}
+
+
 

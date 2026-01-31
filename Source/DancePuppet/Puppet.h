@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "Puppet.generated.h"
 
+
+
 UCLASS()
 class DANCEPUPPET_API APuppet : public ACharacter
 {
@@ -17,13 +19,31 @@ public:
 
 protected:
 	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	virtual void BeginPlay();
+	
+	
+	// Properties
+	UPROPERTY(EditAnywhere, category = "Status")
+	float Health = 3.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, category = "Status")
+	float Damage = 1.f;
+	
+	
+	
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	// Returns the current health of this character
+	UFUNCTION(BlueprintCallable, Category = "Status")
+	float GetHealth() const;
+	// Sets health of this puppet to the new value
+	UFUNCTION(BlueprintCallable, Category = "Status")
+	void SetHealth(float InHealth);
+	// Removes health by input damage
+	UFUNCTION(BlueprintCallable, Category = "Status")
+	void TakeDamage(float InDamage);
+	
 
 };
