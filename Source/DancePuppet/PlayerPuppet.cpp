@@ -9,6 +9,30 @@
 #include "InputMappingContext.h"
 
 
+void APlayerPuppet::BeginPlay()
+{
+	Super::BeginPlay();
+	MaxHealth = Health;
+}
+
+void APlayerPuppet::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	
+	if (Health < MaxHealth && bRegenEnabled)
+	{
+		float health = Health;
+		health += RegenRate * DeltaTime;
+		if (health > MaxHealth)
+		{
+			health = MaxHealth;
+		}
+		Health = health;
+	}
+	
+	
+}
+
 
 // Called to bind functionality to input
 void APlayerPuppet::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -67,4 +91,6 @@ void APlayerPuppet::BasicAttack()
 	Super::BasicAttack();
 	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("Basic Attack triggered!"));
 }
+
+
 

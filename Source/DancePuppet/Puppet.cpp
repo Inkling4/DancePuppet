@@ -72,6 +72,13 @@ void APuppet::BasicAttack()
 {
 	// Override this in the children too
 	
+	if (bIsAttacking)
+	{
+		return;
+	}
+	
+	bIsAttacking = true;
+	
 	PlayAttack1Animation();
 	
 	GetWorld()->GetTimerManager().SetTimer(PuppetTimerHandle, this, &APuppet::Attack1HitDetection, Attack1HitDelay, false);
@@ -95,7 +102,8 @@ void APuppet::Attack1HitDetection()
 				// Deals damage
 				PuppetPtr->PuppetTakeDamage(Damage);
 				// Deals knockback
-				PuppetPtr->PuppetTakeKnockback(GetActorLocation());
+				FVector Location = GetActorLocation();
+				PuppetPtr->PuppetTakeKnockback(Location);
 				bDidItHit = true;
 			}
 		}
@@ -113,6 +121,8 @@ void APuppet::Attack1HitDetection()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, TEXT("Attack missed!"));
 	}
+	
+	bIsAttacking = false;
 }
 
 void APuppet::PuppetTakeKnockback(FVector KnockbackSourceLocation)

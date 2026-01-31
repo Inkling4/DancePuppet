@@ -32,7 +32,10 @@ protected:
 	// For animation synchronization purposes.
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat")
 	float Attack1HitDelay = 0.33f;
-	
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, category = "Combat")
+	bool bIsAttacking = false;
+    	
 	// Properties
 	UPROPERTY(EditAnywhere, category = "Status")
 	float Health = 3.f;
@@ -47,6 +50,7 @@ protected:
 	// Does a basic attack. Has no functionality in the base class, please override.
 	UFUNCTION(BlueprintCallable, Category = "Status")
 	virtual void BasicAttack();
+	
 	
 	
 	UFUNCTION(BlueprintImplementableEvent, category = "Puppet Animations")

@@ -22,6 +22,15 @@ class DANCEPUPPET_API APlayerPuppet : public APuppet
 	
 protected: 
 	
+	// Health regenerated per second
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
+	float RegenRate;
+	
+	float MaxHealth;
+	virtual void BeginPlay() override;
+	// If true, passive regen is enabled.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
+	bool bRegenEnabled = true;
 	// Input:
 	UPROPERTY(EditAnywhere, category = "Input")
 	UInputMappingContext* IMC_PlayerControls;
@@ -32,6 +41,7 @@ protected:
 	void MoveInput(const FInputActionValue& InputValue);
 	void Attack1Input(const FInputActionValue& InputValue);
 	
+	virtual void Tick(float DeltaTime) override;
 	
 	virtual void BasicAttack() override;
 	
