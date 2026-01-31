@@ -1,0 +1,26 @@
+[
+	{
+		"file": "/home/kirby/Documents/Unreal Projects/DancePuppet/Source/DancePuppet/DancePuppet.Build.cs",
+		"arguments": [
+			"/home/kirby/Software/Linux_Unreal_Engine_5.7.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v26_clang-20.1.8-rockylinux8/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/kirby/Documents/Unreal Projects/DancePuppet/.vscode/compileCommands_Default/DancePuppet.1.rsp"
+		],
+		"directory": "/home/kirby/Software/Linux_Unreal_Engine_5.7.2/Engine/Source"
+	},
+	{
+		"file": "/home/kirby/Documents/Unreal Projects/DancePuppet/Source/DancePuppet/DancePuppet.cpp",
+		"arguments": [
+			"/home/kirby/Software/Linux_Unreal_Engine_5.7.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v26_clang-20.1.8-rockylinux8/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/kirby/Documents/Unreal Projects/DancePuppet/.vscode/compileCommands_Default/DancePuppet.1.rsp"
+		],
+		"directory": "/home/kirby/Software/Linux_Unreal_Engine_5.7.2/Engine/Source"
+	},
+	{
+		"file": "/home/kirby/Documents/Unreal Projects/DancePuppet/Source/DancePuppet/DancePuppet.h",
+		"arguments": [
+			"/home/kirby/Software/Linux_Unreal_Engine_5.7.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v26_clang-20.1.8-rockylinux8/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/kirby/Documents/Unreal Projects/DancePuppet/.vscode/compileCommands_Default/DancePuppet.1.rsp"
+		],
+		"directory": "/home/kirby/Software/Linux_Unreal_Engine_5.7.2/Engine/Source"
+	}
+]
