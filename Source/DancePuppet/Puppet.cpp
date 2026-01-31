@@ -25,12 +25,12 @@ void APuppet::Tick(float DeltaTime)
 
 }
 
-float APuppet::GetHealth() const
+float APuppet::PuppetGetHealth() const
 {
 	return Health;
 }
 
-void APuppet::SetHealth(float InHealth)
+void APuppet::PuppetSetHealth(float InHealth)
 {
 	if (InHealth < 0.f)
 	{
@@ -42,7 +42,7 @@ void APuppet::SetHealth(float InHealth)
 	}
 }
 
-void APuppet::TakeDamage(float InDamage)
+void APuppet::PuppetTakeDamage(float InDamage)
 {
 	if (InDamage > Health)
 	{
@@ -52,6 +52,11 @@ void APuppet::TakeDamage(float InDamage)
 	{
 		Health -= InDamage;
 	}
+}
+
+void APuppet::BasicAttack()
+{
+	// Override this in the children
 }
 
 

@@ -28,6 +28,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, category = "Status")
 	float Damage = 1.f;
 	
+	// Does a basic attack. Has no functionality in the base class, please override.
+	UFUNCTION(BlueprintCallable, Category = "Status")
+	virtual void BasicAttack();
 	
 	
 
@@ -37,13 +40,14 @@ public:
 
 	// Returns the current health of this character
 	UFUNCTION(BlueprintCallable, Category = "Status")
-	float GetHealth() const;
+	float PuppetGetHealth() const;
 	// Sets health of this puppet to the new value
 	UFUNCTION(BlueprintCallable, Category = "Status")
-	void SetHealth(float InHealth);
+	void PuppetSetHealth(float InHealth);
 	// Removes health by input damage
 	UFUNCTION(BlueprintCallable, Category = "Status")
-	void TakeDamage(float InDamage);
+	void PuppetTakeDamage(float InDamage);
+	
 	
 
 };
