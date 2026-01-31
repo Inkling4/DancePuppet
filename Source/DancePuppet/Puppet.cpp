@@ -59,7 +59,13 @@ void APuppet::PuppetTakeDamage(float InDamage)
 
 void APuppet::BasicAttack()
 {
-	// Override this in the children
+	// Override this in the children too
+	
+	PlayAttack1Animation();
+	
+	// TODO: Delay variable here, then do collision check and deal damage
+	
+	
 }
 
 

@@ -36,8 +36,10 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Status")
 	virtual void BasicAttack();
 	
+	UFUNCTION(BlueprintImplementableEvent, category = "Puppet Animations")
+	void PlayAttack1Animation();
 	
-
+	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
