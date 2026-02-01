@@ -142,4 +142,5 @@ void APuppet::PuppetTakeKnockback(FVector KnockbackSourceLocation)
 void APuppet::Die()
 {
 	// Override in children
+	OnDeath(); // Calls blueprint event
 }

@@ -19,6 +19,10 @@ public:
 
 protected:
 	
+	// Called whenever this puppet's HP drops to 0
+	UFUNCTION(BlueprintImplementableEvent, category = "Status")
+	void OnDeath();
+	
 	FTimerHandle PuppetTimerHandle;
 	
 	// Called when the game starts or when spawned
