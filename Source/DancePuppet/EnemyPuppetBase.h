@@ -14,6 +14,7 @@ class DANCEPUPPET_API AEnemyPuppetBase : public APuppet
 {
 	GENERATED_BODY()
 	
+protected:
 	
 	
 	virtual void Die() override;

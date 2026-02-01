@@ -6,5 +6,6 @@
 
 void AEnemyPuppetBase::Die()
 {
+	Super::Die();
 	Destroy();
 }
